@@ -5,7 +5,7 @@ async function getProducts(){
             );
         const json = await res.json();
         
-        return json.data.products;
+        return json;
     } catch (error) {
         throw error;
     }
@@ -16,7 +16,7 @@ async function getProductbyId(id) {
             `https://fakestoreapi.com/products/${id}`
             );
         const json = await res.json();
-        return json.data.product;
+        return json;
     } catch (error) {
         throw error;
     }
