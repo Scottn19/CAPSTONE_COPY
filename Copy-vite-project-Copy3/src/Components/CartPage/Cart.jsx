@@ -1,22 +1,23 @@
-// Cart.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
+
 
 export default function Cart({ cartItems, setCartItems }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [isPurchasing, setIsPurchasing] = useState(false);
 
-  // total quantity of items in the cart
-const totalQuantity = cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
-
+  // I renamed totalQuantity to totalQuantityInCart to make it more obvious what it is for
+  // Don't be scard of longer variable names, someteimes I have variable/function names that
+  // are like 8 words combined
+  const totalQuantityInCart = cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
 
   const handlePurchase = async () => {
     try {
       // Simulate payment processing
       setIsPurchasing(true);
 
-      // 2 second delay, I know most store sites do this
+      // 2 second delay, I know most store sites do this // what? I'm guessing it's just for a psuedo feel of it loading someting
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Simulate a successful purchase (Please work)
@@ -32,14 +33,15 @@ const totalQuantity = cartItems ? cartItems.reduce((total, item) => total + item
     }
   };
 
+
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
-      <p>Total Quantity: {totalQuantity}</p>
+      <p>Total Quantity: {totalQuantityInCart}</p>
       <p>Total Price: ${totalPrice.toFixed(2)}</p>
 
       {/* Display items in the cart */}
-      {cartItems.map((item) => (
+      {cartItems.map(item => (
         <div key={item.id} className="cart-item">
           <p>{item.title}</p>
           <p>Quantity: {item.quantity}</p>

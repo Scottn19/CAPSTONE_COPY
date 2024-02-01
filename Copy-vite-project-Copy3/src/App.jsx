@@ -4,8 +4,9 @@ import AllProducts from './Components/AllProducts';
 import Cart from './Components/CartPage/Cart';
 import Login from './Components/Login/Login';
 import Payment from './Components/Payment/Payment';
-// Add a NotFound component for 404 routes for style points if I want
 import Navbar from './Components/Navbar';
+
+// TODO: Add a NotFound component for 404 routes for style points if I want
 
 function App() {
   return (

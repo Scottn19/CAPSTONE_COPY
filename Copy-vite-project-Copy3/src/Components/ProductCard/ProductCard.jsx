@@ -1,13 +1,11 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
-// import { getProducts } from '../../API/index';
-import "./ProductCard.css"
+import './ProductCard.css';
 
-export default function ProductCard({item, component}) {
-    const {id, title, price, description, category, image} = item;
-    const navigate = useNavigate();
+export default function ProductCard({item, component, addToCart}) {
+  const { id, title, price, description, category, image } = item;
+  const navigate = useNavigate();
 
-    const pricedFormatted = price.toFixed(2);
+  const pricedFormatted = price.toFixed(2);
 
   return (
     <div className="product-card-container">
@@ -17,13 +15,12 @@ export default function ProductCard({item, component}) {
       <h3>{category}</h3>
       <h3>{description}</h3>
 
-      {component !== "detail" && (
+      {component !== 'detail' && (
         <>
-        <button onClick={()=>navigate(`/products/${id}`)}>See Details</button>  
-        <button onClick={() => addToCart(item)}>Add to Cart</button>
+          <button onClick={() => navigate(`/products/${id}`)}>See Details</button>  
+          <button onClick={() => addToCart(item)}>Add to Cart</button>
         </>
-  )}  
+      )} 
     </div>
-    
   ); 
 }
