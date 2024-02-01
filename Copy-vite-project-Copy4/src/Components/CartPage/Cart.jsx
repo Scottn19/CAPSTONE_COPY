@@ -4,27 +4,27 @@ import { Link } from 'react-router-dom';
 import './Cart.css';
 
 export default function Cart({ cartItems, setCartItems }) {
-  const [totalPrice, setTotalPrice] = useState(0);
   const [isPurchasing, setIsPurchasing] = useState(false);
 
-  // total quantity of items in the cart
-const totalQuantity = cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
-
+  // Calculate total quantity and price
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const handlePurchase = async () => {
     try {
+      if (cartItems.length === 0) {
+        console.error('Cannot proceed with an empty cart.');
+        return;
+      }
+
       // Simulate payment processing
       setIsPurchasing(true);
 
-      // 2 second delay, I know most store sites do this
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Simulate a successful purchase (Please work)
+      // Simulate a successful purchase
       console.log('Purchase successful!');
 
       // Clear the cart after purchase
       setCartItems([]);
-      setTotalPrice(0);
     } catch (error) {
       console.error('Error during purchase:', error);
     } finally {
@@ -38,7 +38,6 @@ const totalQuantity = cartItems ? cartItems.reduce((total, item) => total + item
       <p>Total Quantity: {totalQuantity}</p>
       <p>Total Price: ${totalPrice.toFixed(2)}</p>
 
-      {/* Display items in the cart */}
       {cartItems.map((item) => (
         <div key={item.id} className="cart-item">
           <p>{item.title}</p>
@@ -47,8 +46,8 @@ const totalQuantity = cartItems ? cartItems.reduce((total, item) => total + item
         </div>
       ))}
 
-      {/* Button navigate to payment screen */}
-      <Link to="/payment">
+      {/* navigate to payment screen */}
+      <Link to="/payment" disabled={cartItems.length === 0 || isPurchasing}>
         <button onClick={handlePurchase} disabled={cartItems.length === 0 || isPurchasing}>
           {isPurchasing ? 'Processing...' : 'Proceed to Payment'}
         </button>

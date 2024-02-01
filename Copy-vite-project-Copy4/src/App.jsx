@@ -4,15 +4,15 @@ import AllProducts from './Components/AllProducts';
 import Cart from './Components/CartPage/Cart';
 import Login from './Components/Login/Login';
 import Payment from './Components/Payment/Payment';
-// Add a NotFound component for 404 routes for style points if I want
-import Navbar from './Components/Navbar';
+import NavBar from './Components/Navbar';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<AllProducts />} />
+        <Route path="/category/:category" element={<AllProducts />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
