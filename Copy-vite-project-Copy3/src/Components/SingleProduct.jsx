@@ -40,7 +40,7 @@ export default function Product() {
     }}>
       {loading && <p>Loading product details...</p>}
       {error && <p>{error}</p>}
-      {!loading && !error && <ProductCard Item={product} component={'detail'} />}
+      {!loading && !error && <ProductCard item={product} component={'detail'} />}
     </div>
-  );
+  );  
 }

@@ -11,7 +11,7 @@
 // }
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './NavBar.css'; // Still need a CSS file 
 
 export default function NavBar() {
@@ -21,7 +21,10 @@ export default function NavBar() {
         All Products
       </NavLink>
       <NavLink to="/login" className="nav-link" activeClassName="active-link">
-        Log in
+        Login
+      </NavLink>
+      <NavLink to="/Cart" className="nav-link" activeClassName="active-link">
+        Cart
       </NavLink>
     </nav>
   );

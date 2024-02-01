@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SingleProduct from './Components/SingleProduct';
 import AllProducts from './Components/AllProducts';
-import NotFound from './Components/NotFound'; // Add a NotFound component for 404 routes
-import Navbar from './Components/Navbar'; // Rename NavBar to Navbar
+import Cart from './Components/CartPage/Cart';
+import Login from './Components/Login/Login';
+import Payment from './Components/Payment/Payment';
+// Add a NotFound component for 404 routes for style points if I want
+import Navbar from './Components/Navbar';
 
 function App() {
   return (
@@ -11,9 +14,9 @@ function App() {
       <Routes>
         <Route path="/" element={<AllProducts />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-
-        {/* Trying a Route for handling a 404 Not Found error*/}
-        <Route path="*" element={<NotFound />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );
