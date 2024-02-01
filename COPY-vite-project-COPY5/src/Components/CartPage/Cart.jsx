@@ -1,5 +1,5 @@
 // Cart.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
 
@@ -7,7 +7,7 @@ export default function Cart({ cartItems, setCartItems }) {
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   // Calculate total quantity and price
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalQuantityInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const handlePurchase = async () => {
@@ -35,7 +35,7 @@ export default function Cart({ cartItems, setCartItems }) {
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
-      <p>Total Quantity: {totalQuantity}</p>
+      <p>Total Quantity: {totalQuantityInCart}</p>
       <p>Total Price: ${totalPrice.toFixed(2)}</p>
 
       {cartItems.map((item) => (
