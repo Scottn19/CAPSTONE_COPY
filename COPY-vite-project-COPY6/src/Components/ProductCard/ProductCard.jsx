@@ -1,4 +1,3 @@
-// ProductCard.jsx
 import { useNavigate } from 'react-router-dom';
 import "./ProductCard.css";
 
@@ -19,7 +18,7 @@ export default function ProductCard({ item, component, addToCart }) {
       {component !== "detail" && (
         <>
           <button onClick={() => navigate(`/products/${id}`)}>See Details</button>
-          <button onClick={() => addToCart(item)}>Add to Cart</button>
+          <button onClick={() => addToCart && addToCart(item)}>Add to Cart</button>
         </>
       )}
     </div>

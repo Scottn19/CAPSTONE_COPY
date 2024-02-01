@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getProductbyId } from '../API';
-import ProductCard from './ProductCard/ProductCard';
+import { getProductbyId } from '../../API';
+import ProductCard from '../ProductCard/ProductCard';
 
 export default function Product() {
   const navigate = useNavigate();

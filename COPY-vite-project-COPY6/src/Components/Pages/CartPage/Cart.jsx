@@ -1,14 +1,30 @@
-// Cart.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ProductCard from '../../ProductCard/ProductCard';
 import './Cart.css';
 
-export default function Cart({ cartItems, setCartItems }) {
+export default function Cart({ cartItems = [], setCartItems }) {
   const [isPurchasing, setIsPurchasing] = useState(false);
 
+  console.log("cartItems:", cartItems);
+
   // Calculate total quantity and price
-  const totalQuantityInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantityInCart = Array.isArray(cartItems)
+  ? cartItems.reduce((total, item) => total + (item.quantity || 0), 0)
+  : 0;
+
+const totalPrice = Array.isArray(cartItems)
+  ? cartItems.reduce((total, item) => total + (item.price || 0) * (item.quantity || 0), 0)
+  : 0;
+
+
+  {Array.isArray(cartItems) && cartItems.map((item) => (
+    <div key={item.id} className="cart-item">
+      <p>{item.title}</p>
+      <p>Quantity: {item.quantity}</p>
+      <p>Price: ${item.price.toFixed(2)}</p>
+    </div>
+  ))}
 
   const handlePurchase = async () => {
     try {
@@ -31,6 +47,14 @@ export default function Cart({ cartItems, setCartItems }) {
       setIsPurchasing(false);
     }
   };
+  const deleteProductFromCart =  (item)=>  {
+  const response = confirm("Are you sure you want to delete from cart")
+  if (response)
+  {const updatedCart = cartItems.filter(product=>product.id!=item.id)
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  setCartItems(updatedCart);}
+}
+
 
   return (
     <div className="cart-container">
@@ -43,6 +67,8 @@ export default function Cart({ cartItems, setCartItems }) {
           <p>{item.title}</p>
           <p>Quantity: {item.quantity}</p>
           <p>Price: ${item.price.toFixed(2)}</p>
+          <button onClick={()=>{deleteProductFromCart(item)}}>Delete from cart</button>
+
         </div>
       ))}
 

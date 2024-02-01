@@ -1,4 +1,4 @@
-import Product from "../Components/SingleProduct";
+import Product from "../Components/Pages/SingleProductPage";
 
 async function getProducts(category = '') {
     try {
@@ -27,3 +27,4 @@ async function getProductbyId(id) {
     }
 }
  export { getProducts, getProductbyId };
+ 
