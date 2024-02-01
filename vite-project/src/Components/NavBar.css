@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    background-color: #333; /* Add your preferred background color */
+    padding: 10px;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: white; /* Add your preferred text color */
+    margin-right: 20px;
+  }
+  
+  .active-link {
+    border-bottom: 2px solid white; /* Add your preferred active link style */
+  }
+  

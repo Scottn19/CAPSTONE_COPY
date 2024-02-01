@@ -1,0 +1,12 @@
+.product-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 27%;
+    align-items: center;
+    border: 3px solid black;
+    margin-bottom: 30px;
+}
+
+.product-card-container img {
+    max-width: 90%;
+}
