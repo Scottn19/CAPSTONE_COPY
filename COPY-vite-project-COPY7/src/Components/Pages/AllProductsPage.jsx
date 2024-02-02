@@ -37,9 +37,13 @@ export default function AllProducts({cartItems, setCartItems}) {
   }, [category]);
 
   const addToCart = (item) => {
-    console.log("addToCart")
-    const localCart = JSON.parse(localStorage.getItem("cart"));
-    const result = localCart.find(product=>product.id == item.id);
+    const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    const result = localCart.find(product => product.id == item.id);
+
+
+
+
     if (result){result.quantity += 1;
       const otherItems = localCart.filter(product => product.id != item.id);
       const updatedCart = [...otherItems, result];
@@ -48,9 +52,8 @@ export default function AllProducts({cartItems, setCartItems}) {
   } else { 
       item.quantity = 1;
       const updatedCart = [...cartItems, item];
-      // Update the cart items
+      // Update the art items
       setCartItems(updatedCart);
-      // add additional logic here, like showing a notification of it working or something
       console.log('Added to cart:', item);
       localStorage.setItem("cart", JSON.stringify(updatedCart))
     

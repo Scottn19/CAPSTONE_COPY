@@ -1,8 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-export default function NavBar({token, setToken, setCartItems}) {
+export default function NavBar({ token, setToken, setCartItems }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+
+    // Clear the cart when the user logs out
+    localStorage.removeItem("cart");
+    setCartItems([]);
+
+    navigate('/');
+  };
+
   return (
     <nav className="navbar">
       <NavLink to="/" className="nav-link" activeclassname="active-link">
@@ -20,24 +33,24 @@ export default function NavBar({token, setToken, setCartItems}) {
       <NavLink to="/category/electronics" className="nav-link" activeclassname="active-link">
         Electronics
       </NavLink>
-      { !token && 
-      <NavLink to="/login" className="nav-link" activeclassname="active-link">
-        Login
-      </NavLink>
+      
+      {!token &&
+        <NavLink to="/login" className="nav-link" activeclassname="active-link">
+          Login
+        </NavLink>
       }
-      { token &&
-        <button onClick={ () => {
-          localStorage.removeItem("cart");
-         localStorage.removeItem("token");
-        setToken(null);
-        setCartItems([]);
-        }}>logout</button>
 
+      {token &&
+        <>
+          <button onClick={handleLogout}>
+            Logout
+          </button>
+          <NavLink to="/cart" className="nav-link" activeclassname="active-link">
+            Cart
+          </NavLink>
+        </>
       }
-      <NavLink to="/cart" className="nav-link" activeclassname="active-link">
-        Cart
-      </NavLink>
-
     </nav>
   );
-  }
+}
+
